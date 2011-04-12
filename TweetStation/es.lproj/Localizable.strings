@@ -374,3 +374,12 @@
 /* TweetStation.UserSelector.MakeMirror() */
 /* Flag: unmatched */
 "@{0}" = "@{0}";
+
+* TweetStation.Settings..ctor() */
+"Auto Rotate" = "Rotación automática";
+
+* TweetStation.Settings..ctor() */
+"Timeline" = "Línea de tiempo";
+
+* TweetStation.Settings..ctor() */
+"Compose Screen" = "Componen la pantalla";

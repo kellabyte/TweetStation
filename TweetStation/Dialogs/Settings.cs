@@ -118,7 +118,7 @@ namespace TweetStation
 				SetupLeftItemEdit ();
 		}
 		
-		BooleanElement playMusic, chicken, selfOnRight, shadows, autoFav;
+		BooleanElement playMusic, chicken, selfOnRight, shadows, autoFav, rotateTimeline, rotateComposer;
 		RootElement compress;
 		
 		public override void ViewWillDisappear (bool animated)
@@ -136,6 +136,9 @@ namespace TweetStation
 			BaseTimelineViewController.ChickenNoisesEnabled = chicken.Value;
 			
 			Util.Defaults.SetInt (compress.RadioSelected, "sizeCompression");
+			Util.Defaults.SetInt (rotateTimeline.Value ? 0 : 1, "disableRotateTimeline");
+			Util.Defaults.SetInt (rotateComposer.Value ? 0 : 1, "disableRotateComposer");
+
 			Util.Defaults.Synchronize ();
 
 			parent.ReloadData ();
@@ -163,6 +166,12 @@ namespace TweetStation
 								}
 							})
 						},
+						
+						new Section (Locale.GetText ("Auto Rotate")){
+							(rotateTimeline = new BooleanElement (Locale.GetText ("Timeline"), Util.Defaults.IntForKey ("disableRotateTimeline") == 0)),
+							(rotateComposer = new BooleanElement (Locale.GetText ("Compose Screen"), Util.Defaults.IntForKey ("disableRotateComposer") == 0))
+						},
+						
 						new Section (Locale.GetText ("Inspiration"), 
 						             Locale.GetText ("Twitter is best used when you are\n" +
 						             				 "inspired.  I picked music and audio\n" +

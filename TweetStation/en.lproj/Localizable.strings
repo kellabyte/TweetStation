@@ -372,3 +372,11 @@
 /* TweetStation.AppDelegate.NewAccountXAuth() */
 "Your twitter username" = "Your twitter username";
 
+* TweetStation.Settings..ctor() */
+"Auto Rotate" = "Auto Rotate";
+
+* TweetStation.Settings..ctor() */
+"Timeline" = "Timeline";
+
+* TweetStation.Settings..ctor() */
+"Compose Screen" = "Compose Screen";

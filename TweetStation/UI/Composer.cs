@@ -84,7 +84,7 @@ namespace TweetStation
 			AddSubview (textView);
 			AddSubview (charsLeft);
 		}
-		
+			
 		void HandleTextViewChanged (object sender, EventArgs e)
 		{
 			string text = textView.Text;
@@ -567,6 +567,41 @@ namespace TweetStation
 			directRecipient = username;
 			
 			Activate (parent);
+		}
+		
+		public override void WillRotate (UIInterfaceOrientation toInterfaceOrientation, double duration)
+		{
+			if (Util.Defaults.IntForKey ("disableRotateComposer") == 0)
+			{
+				int width = (int)UIScreen.MainScreen.Bounds.Width;
+				if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeLeft 
+				    || toInterfaceOrientation == UIInterfaceOrientation.LandscapeRight)
+				{
+					width = (int)UIScreen.MainScreen.Bounds.Height;
+				}
+				
+				navigationBar.Frame = new RectangleF(0, 0, width, 44);
+			}
+			base.WillRotate (toInterfaceOrientation, duration);
+		}
+		
+		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+		{
+			if (Util.Defaults.IntForKey ("disableRotateComposer") == 0)
+			{
+				switch (toInterfaceOrientation)
+				{
+					case UIInterfaceOrientation.LandscapeLeft:
+						return true;
+					case UIInterfaceOrientation.LandscapeRight:
+						return true;
+					case UIInterfaceOrientation.Portrait:
+						return true;
+					case UIInterfaceOrientation.PortraitUpsideDown:
+						return false;
+				}
+			}
+			return false;
 		}
 	}
 	

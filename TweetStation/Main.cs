@@ -431,7 +431,14 @@ namespace TweetStation
 			
 			public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
 			{
-				return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
+				if (Util.Defaults.IntForKey ("disableRotateTimeline") == 0)
+				{
+					return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
+				}
+				else
+				{
+					return (toInterfaceOrientation == UIInterfaceOrientation.Portrait);
+				}
 			}
 
 			void UpdatePosition (bool animate)
